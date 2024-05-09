@@ -38,6 +38,7 @@
           <th scope="col">Dojang</th>
           <th scope="col">Tipe</th>
           <th scope="col">Kelas</th>
+          <th scope="col">Kategori</th>
           <th scope="col">Sesi</th>
         </tr>
       </thead>
@@ -51,6 +52,7 @@
             <td>{{ $d->dojang }}</td>
             <td>{{ $d->type }}</td>
             <td>{{ $d->class }}</td>
+            <td>{{ $d->category }}</td>
             <td>{{ $d->session }}</td>
           </tr>
         @endforeach
