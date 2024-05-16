@@ -30,18 +30,11 @@ return new class extends Migration
         Schema::create('scores', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('participant_id');
+            $table->bigInteger('user_id');
             $table->string('class_name');
-            $table->string('referee');
-            $table->decimal('accuration', 2, 2);
-            $table->decimal('presentation', 2, 2);
-            $table->timestamps();
-        });
-        Schema::create('calculations', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('score_id');
-            $table->decimal('sum_acuration', 2, 2);
-            $table->decimal('sum_presentation', 2, 2);
-            $table->decimal('total', 2, 2);
+            $table->decimal('accuration', 5, 1);
+            $table->decimal('presentation', 5, 1);
+            $table->decimal('total', 5, 1);
             $table->timestamps();
         });
     }
@@ -55,6 +48,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('participants');
         Schema::dropIfExists('scores');
-        Schema::dropIfExists('calculations');
     }
 };
