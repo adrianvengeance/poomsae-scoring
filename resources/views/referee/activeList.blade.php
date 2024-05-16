@@ -20,9 +20,9 @@
               <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $item->name }}</td>
-                <td>{{ $item->dojang . 'garuda bangsa' }}</td>
-                <td></td>
-                <td></td>
+                <td>{{ $item->dojang }}</td>
+                <td>{{ $item->accuration }}</td>
+                <td>{{ $item->presentation }}</td>
                 <td>
                   <a class="btn btn-sm btn-success" id="penjurian" href="{{ route('judging.show', $item->id) }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12 " fill="currentColor"
@@ -43,5 +43,5 @@
 @endsection
 
 @section('scripts')
-  <script src="{{ asset('js/referee.js') }}"></script>
+  {{-- <script src="{{ asset('js/referee.js') }}"></script> --}}
 @endsection

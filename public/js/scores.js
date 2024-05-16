@@ -73,7 +73,6 @@ accuracyMinusThree.addEventListener("click", buttonInput);
 accuracyPlusThree.addEventListener("click", buttonInput);
 accuracyPlusOne.addEventListener("click", buttonInput);
 
-// Attach event listeners to the range inputs
 rangeSpeedPower.addEventListener("input", rangeInput);
 rangeRhythmTempo.addEventListener("input", rangeInput);
 rangeExpressionOfEnergy.addEventListener("input", rangeInput);
@@ -92,14 +91,12 @@ document
             presentation.expressionOfEnergy
         ).toFixed(1);
         const finalTotal = total;
-        const refereeName = localStorage.getItem("referee");
 
         document.getElementsByName("accuration")[0].value = finalAccuracy;
         document.getElementsByName("presentation")[0].value = finalPresentation;
         document.getElementsByName("total")[0].value = finalTotal;
-        document.getElementsByName("referee")[0].value = refereeName;
 
-        console.log(
-            `akurasi ${finalAccuracy}, presntasi ${finalPresentation}, total ${finalTotal}`
-        );
+        // console.log(
+        //     `akurasi ${finalAccuracy}, presntasi ${finalPresentation}, total ${finalTotal}`
+        // );
     });

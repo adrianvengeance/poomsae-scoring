@@ -12,9 +12,9 @@
 
 <body data-bs-theme="dark">
   <nav class="navbar bg-body-tertiary">
-    <div class="container-fluid">
+    <div class="container-sm">
       @if (Route::currentRouteName() == 'judging')
-        <span class="navbar-brand mb-0 h5">Poomsae</span>
+        <a class="navbar-brand mb-0 h5" href="{{ route('judging') }}">Poomsae</a>
       @else
         <button class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#exitJudgingModal">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -45,15 +45,18 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Referee Name</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">{{ auth()->user()->name }}</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <input type="text" name="name" id="refereeName" class="form-control" placeholder="Write your name">
+          Are you want to end your session?
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeModal">Close</button>
-          <button type="button" class="btn btn-primary" id="submit">Save</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal" id="closeModal">Close</button>
+          <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+          </form>
         </div>
       </div>
     </div>

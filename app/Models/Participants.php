@@ -26,4 +26,18 @@ class Participants extends Model
     {
         return Participants::where('type', 'Individual');
     }
+
+    public function scores()
+    {
+        return $this->hasMany(Scores::class);
+    }
+
+    public function getJudgingList($userId)
+    {
+        $data = Participants::where('status', 'active')->leftJoin('scores', function ($join) use ($userId) {
+            $join->on('participants.id', '=', 'scores.participant_id')->where('scores.user_id', $userId);
+        })->select('participants.id', 'participants.name', 'participants.dojang', 'scores.accuration', 'scores.presentation', 'scores.total')->get();
+
+        return $data;
+    }
 }

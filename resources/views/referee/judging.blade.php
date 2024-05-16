@@ -68,7 +68,6 @@
         <form action="{{ route('judging.submit') }}" method="POST">
           @csrf
           <input type="hidden" name="participant_id" value="{{ $participant->id }}">
-          <input type="hidden" name="referee">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">Are you sure to submit?</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

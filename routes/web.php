@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndividuController;
+use App\Http\Controllers\RefereeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,3 +33,13 @@ Route::get('/individu', [IndividuController::class, 'index'])->name('individu');
 Route::get('/team', function () {
     return 'group';
 })->name('team');
+
+Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'authenticate'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::controller(RefereeController::class)->middleware('auth')->group(function () {
+    Route::get('/judging', 'index')->name('judging');
+    Route::get('/judging/{id}', 'show')->name('judging.show');
+    Route::post('/judging', 'submit')->name('judging.submit');
+});
