@@ -3,12 +3,12 @@
   <div class="container-sm ps-0 pe-3">
     <div class="row mt-4 text-center">
       <h4 class="fs-5 mb-0">{{ $participant->name }}</h4>
-      <h5 class="fs-6">{{ $participant->dojang }} SD Islam Al-Azhar 31</h5>
+      <h5 class="fs-6">{{ $participant->dojang }}</h5>
     </div>
     <div class="row text-center mt-3">
       <div class="col-6">
         <span class="">Accuracy</span>
-        <h1 class="p-2" id="accuracyPoint">2.0</h1>
+        <h1 class="p-2" id="accuracyPoint">4.0</h1>
       </div>
       <div class="col-6">
         <span>Presentation</span>
@@ -16,7 +16,7 @@
       </div>
       <div class="col-12">
         <span>Total</span>
-        <h1 class="p-2" id="totalPoint">5.0</h1>
+        <h1 class="p-2" id="totalPoint">7.0</h1>
       </div>
     </div>
     <div class="row">

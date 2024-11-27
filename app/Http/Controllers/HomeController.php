@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Participants;
+use App\Models\Scores;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
@@ -29,6 +30,7 @@ class HomeController extends Controller
         $spreadsheet = $reader->load($excel);
         $array = ($spreadsheet->getActiveSheet()->toArray());
         Participants::truncate();
+        Scores::truncate();
 
         foreach ($array as $i => $value) {
             if ($i == 0) continue;

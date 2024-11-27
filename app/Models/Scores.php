@@ -20,4 +20,9 @@ class Scores extends Model
     {
         return $this->belongsTo(Participants::class);
     }
+
+    public function alreadyJudged($participants, $user_id)
+    {
+        return Scores::select('participant_id')->whereIn('participant_id', $participants)->where('user_id', $user_id)->get();
+    }
 }

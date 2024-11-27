@@ -12,7 +12,7 @@ let rangeRhythmTempo = document.getElementById("rhythmTempo");
 let rangeExpressionOfEnergy = document.getElementById("expressionOfEnergy");
 
 let total = 5.0;
-let accuracy = 2.0;
+let accuracy = 4.0;
 
 const presentation = {
     speedPower: 1.0,

@@ -10,7 +10,7 @@
   @yield('header')
 </head>
 
-<body data-bs-theme="dark">
+<body data-bs-theme="light">
   <nav class="navbar bg-body-tertiary">
     <div class="container-sm">
       @if (Route::currentRouteName() == 'judging')

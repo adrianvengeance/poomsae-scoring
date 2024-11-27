@@ -29,6 +29,8 @@ Route::controller(HomeController::class)->group(function () {
 });
 
 Route::get('/individu', [IndividuController::class, 'index'])->name('individu');
+Route::get('/individu/active', [IndividuController::class, 'activeList'])->name('active');
+Route::get('/showing', [IndividuController::class, 'showing'])->name('showing');
 
 Route::get('/team', function () {
     return 'group';

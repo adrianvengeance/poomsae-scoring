@@ -24,7 +24,7 @@ class RefereeController extends Controller
 
     public function show($id)
     {
-        $participant = Participants::find($id);
+        $participant = Participants::where('status', 'active')->where('id', $id)->first();
         return view('referee/judging', compact('participant'));
     }
 
