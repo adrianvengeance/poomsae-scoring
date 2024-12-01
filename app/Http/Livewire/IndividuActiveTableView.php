@@ -26,14 +26,19 @@ class IndividuActiveTableView extends TableView
     public function headers(): array
     {
         return [
-            "Name",
-            "Dojang",
+            "Name - Dojang",
             "A1",
             "P1",
             "A2",
             "P2",
             "A3",
             "P3",
+            "A4",
+            "P4",
+            "A5",
+            "P5",
+            "A6",
+            "P6",
             "Accuracy",
             "Presentation",
             "Total",
@@ -51,14 +56,19 @@ class IndividuActiveTableView extends TableView
         $acc = explode(',', $model->acc_scores);
         $pre = explode(',', $model->pre_scores);
         return [
-            $model->name,
-            $model->dojang,
+            $model->name . ' ' . $model->dojang,
             $acc[0] ?? '',
             $pre[0] ?? '',
             $acc[1] ?? '',
             $pre[1] ?? '',
             $acc[2] ?? '',
             $pre[2] ?? '',
+            $acc[3] ?? '',
+            $pre[3] ?? '',
+            $acc[4] ?? '',
+            $pre[4] ?? '',
+            $acc[5] ?? '',
+            $pre[5] ?? '',
             $model->sum_acc,
             $model->sum_pre,
             $model->total,

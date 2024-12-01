@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Files;
 use App\Models\Participants;
 use App\Models\Scores;
 use Illuminate\Http\Request;
@@ -16,8 +17,14 @@ class HomeController extends Controller
 
     public function showData()
     {
-        $data = Participants::all();
-        return view('data', compact('data'));
+        // $data = Participants::all();
+        // return view('data', compact('data'));
+        $file = Files::first() ? '"' . Files::latest()->first()->name . '" at ' . Files::latest()->first()->created_at : null;
+        $variables = [
+            'data' => Participants::all(),
+            'files' => $file,
+        ];
+        return view('data')->with($variables);
     }
 
     public function upload(Request $req)
@@ -32,6 +39,10 @@ class HomeController extends Controller
         Participants::truncate();
         Scores::truncate();
 
+        Files::create([
+            'name' => $fileName
+        ]);
+
         foreach ($array as $i => $value) {
             if ($i == 0) continue;
 
@@ -43,7 +54,7 @@ class HomeController extends Controller
                 'type' => $value[4],
                 'class' => $value[5],
                 'category' => $value[6],
-                'session' => $value[7],
+                // 'session' => $value[7],
             ]);
         }
 

@@ -5,7 +5,7 @@ namespace App\Filters;
 use Illuminate\Database\Eloquent\Builder;
 use LaravelViews\Filters\Filter;
 
-class IndividuClassFilter extends Filter
+class IndividuGenderFilter extends Filter
 {
     /**
      * Modify the current query when the filter is used
@@ -16,7 +16,7 @@ class IndividuClassFilter extends Filter
      */
     public function apply(Builder $query, $value, $request): Builder
     {
-        return $query->where('class', $value);
+        return $query->where('gender', $value);
     }
 
     /**
@@ -27,13 +27,10 @@ class IndividuClassFilter extends Filter
     public function options(): array
     {
         return [
-            'U9' => 'U9',
-            'U12' => 'U12',
-            'U14' => 'U14',
-            'U17' => 'U17',
-            '>17' => '>17',
+            'Male' => 'M',
+            'Female' => 'F',
         ];
     }
 
-    public $title = "Class";
+    public $title = 'Gender';
 }

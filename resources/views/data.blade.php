@@ -23,7 +23,10 @@
           </div>
         </div>
         <div class="col-md-4">
-          <button type="submit" class="btn btn-outline-primary">Submit</button>
+          <div class="d-flex align-items-center">
+            <button type="submit" class="btn btn-outline-primary">Submit</button>
+            <h6 class="ms-2">{{ $files }}</h6>
+          </div>
         </div>
       </div>
     </form>

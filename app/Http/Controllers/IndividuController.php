@@ -17,10 +17,11 @@ class IndividuController extends Controller
         $firstPerson = (Participants::where('status', 'active')->first());
         if (!$firstPerson) return abort(404);
         $gender = strtolower($firstPerson->gender) == 'm' ? 'Putra' : 'Putri';
-        // $participantsModel = new Participants();
+        $participantsModel = new Participants();
         $data = [
-            'title' => $firstPerson->type . ' ' . $gender . ' ' . $firstPerson->class . ' ' . $firstPerson->category . ' Sesi ' . $firstPerson->session,
-            // 'participants'  => $participantsModel->showingActive(),
+            // 'title' => $firstPerson->type . ' ' . $gender . ' ' . $firstPerson->class . ' ' . $firstPerson->category . ' Sesi ' . $firstPerson->session,
+            'title' => $firstPerson->type . ' ' . $gender . ' ' . $firstPerson->class . ' ' . $firstPerson->category,
+            'participants'  => $participantsModel->showingActive(),
             // 'colors' => ['white', 'gold', 'ghostwhite', 'saddlebrown', 'saddlebrown']
         ];
         return view('individuActive', $data);
@@ -34,7 +35,8 @@ class IndividuController extends Controller
 
         if ($firstPerson) {
             $gender = strtolower($firstPerson->gender) == 'm' ? 'Putra' : 'Putri';
-            $title = $firstPerson->type . ' ' . $gender . ' ' . $firstPerson->class . ' ' . $firstPerson->category . ' Sesi ' . $firstPerson->session;
+            // $title = $firstPerson->type . ' ' . $gender . ' ' . $firstPerson->class . ' ' . $firstPerson->category . ' Sesi ' . $firstPerson->session;
+            $title = $firstPerson->type . ' ' . $gender . ' ' . $firstPerson->class . ' ' . $firstPerson->category;
         }
         $data = [
             'title' => $title,

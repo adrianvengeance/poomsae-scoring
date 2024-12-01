@@ -87,6 +87,14 @@
 
 <body data-bs-theme="light">
 
+  @php
+    function nameResolver($string)
+    {
+        $name = explode(' ', $string);
+        return $name[0] . ' ' . $name[1];
+    }
+  @endphp
+
   <div class="container-fluid">
     <div class="row">
       <div class="row mt-3">
@@ -98,35 +106,37 @@
             <table class="table fs-4">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Dojang</th>
-                  <th>A1</th>
-                  <th>P1</th>
-                  <th>A2</th>
-                  <th>P2</th>
-                  <th>A3</th>
-                  <th>P3</th>
-                  <th>Accuracy</th>
-                  <th>Presentation</th>
-                  <th>Total</th>
-                  <th>Ranking</th>
+                  <th>Name - Dojang</th>
+                  <th class="text-center">A1</th>
+                  <th class="text-center">P1</th>
+                  <th class="text-center">A2</th>
+                  <th class="text-center">P2</th>
+                  <th class="text-center">A3</th>
+                  <th class="text-center">P3</th>
+                  <th class="text-center">Accuracy</th>
+                  <th class="text-center">Presentation</th>
+                  <th class="text-center">Total</th>
+                  <th class="text-center">Ranking</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach ($participants as $p)
                   <tr class="align-middle">
-                    <td>{{ $p->name }}</td>
-                    <td>{{ $p->dojang }}</td>
-                    <td class="fs-2 text-center">{{ $p->acc_scores[0] ?? '' }}</td>
-                    <td class="fs-2 text-center">{{ $p->pre_scores[0] ?? '' }}</td>
-                    <td class="fs-2 text-center">{{ $p->acc_scores[1] ?? '' }}</td>
-                    <td class="fs-2 text-center">{{ $p->pre_scores[1] ?? '' }}</td>
-                    <td class="fs-2 text-center">{{ $p->acc_scores[2] ?? '' }}</td>
-                    <td class="fs-2 text-center">{{ $p->pre_scores[2] ?? '' }}</td>
+                    <td class="">
+                      <p class="text-decoration-underline mb-0">{{ nameResolver($p->name) }}</p>
+                      {{ $p->dojang }}
+                    </td>
+                    <td class="fs-1 text-center">{{ $p->acc_scores[0] ?? '' }}<br>{{ $p->acc_scores[3] ?? '' }}</td>
+                    <td class="fs-1 text-center">{{ $p->pre_scores[0] ?? '' }}<br>{{ $p->pre_scores[3] ?? '' }}</td>
+                    <td class="fs-1 text-center">{{ $p->acc_scores[1] ?? '' }}<br>{{ $p->acc_scores[4] ?? '' }}</td>
+                    <td class="fs-1 text-center">{{ $p->pre_scores[1] ?? '' }}<br>{{ $p->pre_scores[4] ?? '' }}</td>
+                    <td class="fs-1 text-center">{{ $p->acc_scores[2] ?? '' }}<br>{{ $p->acc_scores[5] ?? '' }}</td>
+                    <td class="fs-1 text-center">{{ $p->pre_scores[2] ?? '' }}<br>{{ $p->pre_scores[5] ?? '' }}</td>
                     <td class="fs-1 text-center">{{ $p->sum_acc }}</td>
                     <td class="fs-1 text-center">{{ $p->sum_pre }}</td>
                     <td class="fs-1 text-center">{{ $p->total }}</td>
-                    <td class="fs-1 fw-bold text-center" style="background-color: {{ $colors[$loop->iteration] }}">
+                    <td class="fs-1 fw-bold text-center border border-dark"
+                      style="background-color: {{ $colors[$loop->iteration] }}">
                       {{ $loop->iteration }}
                     </td>
                   </tr>
@@ -151,7 +161,7 @@
     function autoRefresh() {
       window.location = window.location.href;
     }
-    setInterval('autoRefresh()', 000);
+    setInterval('autoRefresh()', 5000);
   </script>
 
 </body>

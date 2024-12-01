@@ -17,7 +17,8 @@ class RefereeController extends Controller
         $gender = strtolower($firstPerson->gender) == 'm' ? 'Putra' : 'Putri';
         $data = [
             'participants' => $participantsModel->getJudgingList(auth()->user()->id),
-            'title' => $firstPerson->type . ' ' . $gender . ' ' . $firstPerson->class . '<br>' . $firstPerson->category . ' Sesi ' . $firstPerson->session,
+            // 'title' => $firstPerson->type . ' ' . $gender . ' ' . $firstPerson->class . '<br>' . $firstPerson->category . ' Sesi ' . $firstPerson->session,
+            'title' => $firstPerson->type . ' ' . $gender . ' ' . $firstPerson->class . '<br>' . $firstPerson->category,
         ];
         return view('referee/activeList', $data);
     }
@@ -32,7 +33,8 @@ class RefereeController extends Controller
     {
         $firstPerson = (Participants::where('status', 'active')->first());
         $gender = strtolower($firstPerson->gender) == 'm' ? 'Putra' : 'Putri';
-        $class = $firstPerson->type . ' ' . $gender . ' ' . $firstPerson->class . ' ' . $firstPerson->category . ' Sesi ' . $firstPerson->session;
+        // $class = $firstPerson->type . ' ' . $gender . ' ' . $firstPerson->class . ' ' . $firstPerson->category . ' Sesi ' . $firstPerson->session;
+        $class = $firstPerson->type . ' ' . $gender . ' ' . $firstPerson->class . ' ' . $firstPerson->category;
         Scores::create([
             'participant_id' => $req->participant_id,
             'user_id'       => auth()->user()->id,

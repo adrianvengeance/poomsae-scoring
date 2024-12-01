@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Actions\ActivateIndividuAction;
 use App\Filters\IndividuCategoryFilter;
 use App\Filters\IndividuClassFilter;
+use App\Filters\IndividuGenderFilter;
 use App\Models\Participants;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use LaravelViews\Facades\Header;
@@ -93,6 +94,7 @@ class IndividuTableView extends TableView
     protected function filters()
     {
         return [
+            new IndividuGenderFilter,
             new IndividuClassFilter,
             new IndividuCategoryFilter
         ];
