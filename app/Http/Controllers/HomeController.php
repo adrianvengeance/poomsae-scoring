@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Files;
 use App\Models\Participants;
 use App\Models\Scores;
+use App\Models\Teams;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
@@ -38,6 +39,7 @@ class HomeController extends Controller
         $array = ($spreadsheet->getActiveSheet()->toArray());
         Participants::truncate();
         Scores::truncate();
+        Teams::truncate();
 
         Files::create([
             'name' => $fileName
@@ -45,7 +47,7 @@ class HomeController extends Controller
 
         foreach ($array as $i => $value) {
             if ($i == 0) continue;
-
+            if ($value[0] == 'end') break;
             Participants::create([
                 'name' => $value[0],
                 'birthdate' => $value[1],
@@ -59,6 +61,15 @@ class HomeController extends Controller
         }
 
         session()->flash('inserted', 'File excel ' . $fileName . ' uploaded successfully!');
+        return redirect()->back();
+    }
+
+    public function createTeams()
+    {
+        $participantsModel = new Participants();
+        $participantsModel->createPair();
+        $participantsModel->createGroup();
+        session()->flash('created', 'Pair dan Group successfully created!');
         return redirect()->back();
     }
 
