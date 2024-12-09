@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('birthdate');
-            $table->char('gender', 1);
+            $table->date('birthdate')->nullable();
+            $table->char('gender', 1)->nullable();
             $table->string('dojang');
             $table->string('type');
             $table->string('class');

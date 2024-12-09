@@ -72,8 +72,9 @@
             <tr>
               <th scope="row">{{ $loop->iteration }}</th>
               <td>{{ $d->name }}</td>
-              <td>{{ $d->birthdate }}</td>
-              <td>{{ strtolower($d->gender) == 'm' ? 'Male' : 'Female' }}</td>
+              <td>{{ $d->birthdate ?? '-' }}</td>
+              <td>{{ strtolower($d->gender) == 'm' ? 'Male' : (strtolower($d->gender) == 'f' ? 'Female' : '-') }}
+              </td>
               <td>{{ $d->dojang }}</td>
               <td>{{ $d->type }}</td>
               <td>{{ $d->class }}</td>

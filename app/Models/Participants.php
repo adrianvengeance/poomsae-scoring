@@ -28,11 +28,6 @@ class Participants extends Model
         return Participants::where('type', 'Individual');
     }
 
-    public function scopeTeam()
-    {
-        return Participants::whereNot('type', 'Individual');
-    }
-
     public function scopeActiveIndividu()
     {
         // its fuckin workssss
@@ -129,56 +124,56 @@ class Participants extends Model
         return ($participants);
     }
 
-    public function createPair()
-    {
-        $allPair = Participants::where('type', 'pair')->get();
-        $teamedPair = [];
-        for ($i = 0; $i < count($allPair); $i += 2) {
-            if (isset($allPair[$i + 1])) {
-                $teamedPair[] = [$allPair[$i], $allPair[$i + 1]];
-            }
-        }
+    // public function createPair()
+    // {
+    //     $allPair = Participants::where('type', 'pair')->get();
+    //     $teamedPair = [];
+    //     for ($i = 0; $i < count($allPair); $i += 2) {
+    //         if (isset($allPair[$i + 1])) {
+    //             $teamedPair[] = [$allPair[$i], $allPair[$i + 1]];
+    //         }
+    //     }
 
-        for ($x = 0; $x < count($teamedPair); $x++) {
-            if ($teamedPair[$x][0]->dojang == $teamedPair[$x][1]->dojang && $teamedPair[$x][0]->class == $teamedPair[$x][1]->class) {
-                Teams::create([
-                    'participant_id' => $teamedPair[$x][0]->id,
-                    'participant_id2' => $teamedPair[$x][1]->id,
-                    'name' => $this->nameResolver($teamedPair[$x][0]->name) . ' - ' . $this->nameResolver($teamedPair[$x][1]->name),
-                    'dojang' => $teamedPair[$x][0]->dojang,
-                    'type' => $teamedPair[$x][0]->type,
-                    'class' => $teamedPair[$x][0]->class,
-                    'category' => $teamedPair[$x][0]->category
-                ]);
-            }
-        }
-    }
+    //     for ($x = 0; $x < count($teamedPair); $x++) {
+    //         if ($teamedPair[$x][0]->dojang == $teamedPair[$x][1]->dojang && $teamedPair[$x][0]->class == $teamedPair[$x][1]->class) {
+    //             Teams::create([
+    //                 'participant_id' => $teamedPair[$x][0]->id,
+    //                 'participant_id2' => $teamedPair[$x][1]->id,
+    //                 'name' => $this->nameResolver($teamedPair[$x][0]->name) . ' - ' . $this->nameResolver($teamedPair[$x][1]->name),
+    //                 'dojang' => $teamedPair[$x][0]->dojang,
+    //                 'type' => $teamedPair[$x][0]->type,
+    //                 'class' => $teamedPair[$x][0]->class,
+    //                 'category' => $teamedPair[$x][0]->category
+    //             ]);
+    //         }
+    //     }
+    // }
 
-    public function createGroup()
-    {
-        $allGroup = Participants::where('type', 'group')->get();
-        $teamedGroup = [];
-        for ($i = 0; $i < count($allGroup); $i += 3) {
-            if (isset($allGroup[$i + 2])) {
-                $teamedGroup[] = [$allGroup[$i], $allGroup[$i + 1], $allGroup[$i + 2]];
-            }
-        }
+    // public function createGroup()
+    // {
+    //     $allGroup = Participants::where('type', 'group')->get();
+    //     $teamedGroup = [];
+    //     for ($i = 0; $i < count($allGroup); $i += 3) {
+    //         if (isset($allGroup[$i + 2])) {
+    //             $teamedGroup[] = [$allGroup[$i], $allGroup[$i + 1], $allGroup[$i + 2]];
+    //         }
+    //     }
 
-        for ($n = 0; $n < count($teamedGroup); $n++) {
-            if ($teamedGroup[$n][0]->dojang == $teamedGroup[$n][1]->dojang && $teamedGroup[$n][0]->dojang == $teamedGroup[$n][2]->dojang && $teamedGroup[$n][0]->class == $teamedGroup[$n][1]->class && $teamedGroup[$n][0]->class == $teamedGroup[$n][2]->class) {
-                Teams::create([
-                    'participant_id' => $teamedGroup[$n][0]->id,
-                    'participant_id2' => $teamedGroup[$n][1]->id,
-                    'participant_id3' => $teamedGroup[$n][2]->id,
-                    'name' => $this->nameResolver($teamedGroup[$n][0]->name) . ' - ' . $this->nameResolver($teamedGroup[$n][1]->name) . ' - ' . $this->nameResolver($teamedGroup[$n][2]->name),
-                    'dojang' => $teamedGroup[$n][0]->dojang,
-                    'type' => $teamedGroup[$n][0]->type,
-                    'class' => $teamedGroup[$n][0]->class,
-                    'category' => $teamedGroup[$n][0]->category
-                ]);
-            }
-        }
-    }
+    //     for ($n = 0; $n < count($teamedGroup); $n++) {
+    //         if ($teamedGroup[$n][0]->dojang == $teamedGroup[$n][1]->dojang && $teamedGroup[$n][0]->dojang == $teamedGroup[$n][2]->dojang && $teamedGroup[$n][0]->class == $teamedGroup[$n][1]->class && $teamedGroup[$n][0]->class == $teamedGroup[$n][2]->class) {
+    //             Teams::create([
+    //                 'participant_id' => $teamedGroup[$n][0]->id,
+    //                 'participant_id2' => $teamedGroup[$n][1]->id,
+    //                 'participant_id3' => $teamedGroup[$n][2]->id,
+    //                 'name' => $this->nameResolver($teamedGroup[$n][0]->name) . ' - ' . $this->nameResolver($teamedGroup[$n][1]->name) . ' - ' . $this->nameResolver($teamedGroup[$n][2]->name),
+    //                 'dojang' => $teamedGroup[$n][0]->dojang,
+    //                 'type' => $teamedGroup[$n][0]->type,
+    //                 'class' => $teamedGroup[$n][0]->class,
+    //                 'category' => $teamedGroup[$n][0]->category
+    //             ]);
+    //         }
+    //     }
+    // }
 
     private function nameResolver($string)
     {

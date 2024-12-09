@@ -9,7 +9,6 @@ class TeamController extends Controller
 {
     public function index()
     {
-        $model = new Participants();
-        return 'hi';
+        return view('teams');
     }
 }

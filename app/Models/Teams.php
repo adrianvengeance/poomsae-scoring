@@ -22,4 +22,9 @@ class Teams extends Model
         'status',
         'ranking'
     ];
+
+    public function scopeFindAll()
+    {
+        return Teams::query();
+    }
 }
