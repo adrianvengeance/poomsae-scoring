@@ -8,14 +8,14 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use LaravelViews\Facades\UI;
 use LaravelViews\Views\TableView;
 
-class IndividuActiveTableView extends TableView
+class ActiveTableView extends TableView
 {
     /**
      * Sets a model class to get the initial data
      */
     public function repository(): Builder
     {
-        return Participants::activeIndividu();
+        return Participants::active();
     }
 
     /**
@@ -56,7 +56,7 @@ class IndividuActiveTableView extends TableView
         $acc = explode(',', $model->acc_scores);
         $pre = explode(',', $model->pre_scores);
         return [
-            $model->name . ' ' . $model->dojang,
+            $model->name . ' - ' . $model->dojang,
             $acc[0] ?? '',
             $pre[0] ?? '',
             $acc[1] ?? '',

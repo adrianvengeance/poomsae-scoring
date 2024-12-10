@@ -123,7 +123,7 @@
                 @foreach ($participants as $p)
                   <tr class="align-middle">
                     <td class="">
-                      <p class="text-decoration-underline mb-0">{{ nameResolver($p->name) }}</p>
+                      <p class="text-decoration-underline mb-0">{{ $team ? $p->name : nameResolver($p->name) }}</p>
                       {{ $p->dojang }}
                     </td>
                     <td class="fs-1 text-center">{{ $p->acc_scores[0] ?? '' }}<br>{{ $p->acc_scores[3] ?? '' }}</td>

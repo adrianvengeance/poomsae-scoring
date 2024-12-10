@@ -1,8 +1,7 @@
 @extends('layout/layout')
 
 @section('content')
-  <div class="row mt-3">
-    <h1 class="h1">Hello World from Data</h1>
+  <div class="row ">
     <form action="{{ route('upload') }}" method="post" class="my-3" enctype="multipart/form-data">
       {{ csrf_field() }}
       <div class="row">
@@ -43,7 +42,7 @@
           </div>
           <div class="col-6">
             <div class="text-end">
-              <a class="btn btn-success" href="{{ route('create-teams') }}">Create Pair & Group</a>
+              {{-- <a class="btn btn-success" href="{{ route('create-teams') }}">Create Pair & Group</a> --}}
             </div>
           </div>
         </div>

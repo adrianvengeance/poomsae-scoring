@@ -14,7 +14,7 @@ class RefereeController extends Controller
         $participantsModel = new Participants();
         $firstPerson = (Participants::where('status', 'active')->first());
         if (!$firstPerson) return abort(404);
-        $gender = strtolower($firstPerson->gender) == 'm' ? 'Putra' : 'Putri';
+        $gender = strtolower($firstPerson->gender) == 'm' ? 'Putra' : (strtolower($firstPerson->gender) == 'f' ? 'Putri' : '');
         $data = [
             'participants' => $participantsModel->getJudgingList(auth()->user()->id),
             // 'title' => $firstPerson->type . ' ' . $gender . ' ' . $firstPerson->class . '<br>' . $firstPerson->category . ' Sesi ' . $firstPerson->session,
@@ -32,7 +32,7 @@ class RefereeController extends Controller
     public function submit(Request $req)
     {
         $firstPerson = (Participants::where('status', 'active')->first());
-        $gender = strtolower($firstPerson->gender) == 'm' ? 'Putra' : 'Putri';
+        $gender = strtolower($firstPerson->gender) == 'm' ? 'Putra' : (strtolower($firstPerson->gender) == 'f' ? 'Putri' : '');
         // $class = $firstPerson->type . ' ' . $gender . ' ' . $firstPerson->class . ' ' . $firstPerson->category . ' Sesi ' . $firstPerson->session;
         $class = $firstPerson->type . ' ' . $gender . ' ' . $firstPerson->class . ' ' . $firstPerson->category;
         Scores::create([

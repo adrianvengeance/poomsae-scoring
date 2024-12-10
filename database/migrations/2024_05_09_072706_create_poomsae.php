@@ -42,21 +42,6 @@ return new class extends Migration
             $table->string('name');
             $table->timestamps();
         });
-        Schema::create('teams', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('participant_id');
-            $table->bigInteger('participant_id2');
-            $table->bigInteger('participant_id3')->nullable();
-            $table->string('name');
-            $table->string('dojang');
-            $table->string('type');
-            $table->string('class');
-            $table->string('category');
-            $table->string('session')->nullable();
-            $table->enum('status', ['active', 'inactive'])->nullable();
-            $table->smallInteger('ranking')->nullable();
-            $table->timestamps();
-        });
     }
 
     /**
@@ -69,6 +54,5 @@ return new class extends Migration
         Schema::dropIfExists('participants');
         Schema::dropIfExists('scores');
         Schema::dropIfExists('files');
-        Schema::dropIfExists('teams');
     }
 };

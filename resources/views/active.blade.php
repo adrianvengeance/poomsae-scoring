@@ -10,7 +10,7 @@
       <p class="h3 text-center mb-4">{!! $title !!}</p>
     </a>
 
-    @livewire('individu-active-table-view')
+    @livewire('active-table-view')
     @csrf
 
 

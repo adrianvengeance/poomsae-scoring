@@ -5,9 +5,7 @@
 @endsection
 
 @section('content')
-  <div class="row mt-3">
-    <h1 class="h1">Hello World from Individu</h1>
-
+  <div class="row">
     @livewire('individu-table-view')
     @csrf
   </div>

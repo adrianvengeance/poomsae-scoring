@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Files;
 use App\Models\Participants;
 use App\Models\Scores;
-use App\Models\Teams;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
-use PhpParser\Node\Stmt\Continue_;
+
 
 class HomeController extends Controller
 {
@@ -19,9 +18,7 @@ class HomeController extends Controller
 
     public function showData()
     {
-        // $data = Participants::all();
-        // return view('data', compact('data'));
-        $file = Files::first() ? '"' . Files::latest()->first()->name . '" at ' . Files::latest()->first()->created_at : null;
+        $file = Files::first() ? '"' . Files::latest()->first()->name . '" at ' . Files::latest()->first()->created_at : " no file";
         $variables = [
             'data' => Participants::all(),
             'files' => "Last upload is " . $file,
@@ -40,7 +37,6 @@ class HomeController extends Controller
         $array = ($spreadsheet->getActiveSheet()->toArray());
         Participants::truncate();
         Scores::truncate();
-        Teams::truncate();
 
         Files::create([
             'name' => $fileName
@@ -159,14 +155,14 @@ class HomeController extends Controller
         return $name[0];
     }
 
-    public function createTeams()
-    {
-        $participantsModel = new Participants();
-        $participantsModel->createPair();
-        $participantsModel->createGroup();
-        session()->flash('created', 'Pair dan Group successfully created!');
-        return redirect()->back();
-    }
+    // public function createTeams()
+    // {
+    //     $participantsModel = new Participants();
+    //     $participantsModel->createPair();
+    //     $participantsModel->createGroup();
+    //     session()->flash('created', 'Pair dan Group successfully created!');
+    //     return redirect()->back();
+    // }
 
     public function showHistory()
     {

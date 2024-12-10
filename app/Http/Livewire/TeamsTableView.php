@@ -2,6 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Actions\ActivateTeamAction;
+use App\Filters\TeamClassFilter;
+use App\Models\Participants;
 use App\Models\Teams;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use LaravelViews\Facades\Header;
@@ -12,7 +15,7 @@ class TeamsTableView extends TableView
 {
     public function repository(): Builder
     {
-        return Teams::findAll();
+        return Participants::team();
     }
 
     /**
@@ -23,13 +26,10 @@ class TeamsTableView extends TableView
     public function headers(): array
     {
         return [
-            Header::title('Session')->sortBy('session'),
+            // Header::title('Session')->sortBy('session'),
             "Status",
             'Ranking',
             'Name',
-            'Birthdate',
-            Header::title('Age')->sortBy('birthdate'),
-            'Gender',
             Header::title('Dojang')->sortBy('dojang'),
             Header::title('Tipe')->sortBy('type'),
             Header::title('Category')->sortBy('caategory'),
@@ -45,15 +45,11 @@ class TeamsTableView extends TableView
     public function row($model): array
     {
         return [
-            $model->session,
+            // $model->session,
             $this->showStatus($model->status),
             UI::editable($model, 'ranking'),
             // $model->ranking,
             $model->name,
-            $model->birthdate,
-            date_diff(date_create($model->birthdate), date_create('today'))->y,
-            // floor((time() - strtotime($model->birthdate)) / 31556926),
-            strtolower($model->gender) == "m" ? "Male" : "Female",
             $model->dojang,
             $model->type,
             $model->category,
@@ -78,5 +74,27 @@ class TeamsTableView extends TableView
                 break;
         }
         return $print;
+    }
+
+    public $paginate = 20;
+    public $searchBy = ['name', 'dojang'];
+
+    protected function filters()
+    {
+        return [
+            new TeamClassFilter,
+        ];
+    }
+
+    protected function bulkActions()
+    {
+        return [
+            new ActivateTeamAction,
+        ];
+    }
+
+    public function update(Participants $participants, $data)
+    {
+        $participants->update($data);
     }
 }

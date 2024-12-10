@@ -28,7 +28,12 @@ class Participants extends Model
         return Participants::where('type', 'Individual');
     }
 
-    public function scopeActiveIndividu()
+    public function scopeTeam()
+    {
+        return Participants::whereNot('type', 'individual');
+    }
+
+    public function scopeActive()
     {
         // its fuckin workssss
         // $participants = Participants::leftJoin('scores', 'participants.id', '=', 'scores.participant_id')->select(
@@ -62,7 +67,7 @@ class Participants extends Model
                 DB::raw('GROUP_CONCAT(scores.presentation ORDER BY scores.id ASC) as pre_scores'),
                 DB::raw('SUM(scores.accuration) as sum_acc'),
                 DB::raw('SUM(scores.presentation) as sum_pre'),
-                DB::raw('SUM((scores.accuration + scores.presentation)/6) as total')
+                DB::raw('SUM((scores.accuration + scores.presentation)/6) as total') //change this to 6 if it two or 3 if it one perform
             )
             ->where('status', 'active')
             ->groupBy('participants.id', 'participants.name', 'participants.dojang')
@@ -108,7 +113,7 @@ class Participants extends Model
             $pre_scores = explode(',', $participant->pre_scores);
             $participant->sum_acc = (float) $participant->sum_acc;
             $participant->sum_pre = (float) $participant->sum_pre;
-            $participant->total = (float) number_format((($participant->sum_acc + $participant->sum_pre) / 6), 1, '.', '');
+            $participant->total = (float) number_format((($participant->sum_acc + $participant->sum_pre) / 6), 1, '.', ''); //change this to 6 if it two or 3 if it one perform
             $participant->acc_scores = $acc_scores;
             $participant->pre_scores = $pre_scores;
             return $participant;

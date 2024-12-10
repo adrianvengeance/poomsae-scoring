@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActiveController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndividuController;
@@ -31,8 +32,9 @@ Route::controller(HomeController::class)->group(function () {
 });
 
 Route::get('/individu', [IndividuController::class, 'index'])->name('individu');
-Route::get('/individu/active', [IndividuController::class, 'activeList'])->name('active');
-Route::get('/showing', [IndividuController::class, 'showing'])->name('showing');
+
+Route::get('/active', [ActiveController::class, 'activeList'])->name('active');
+Route::get('/showing', [ActiveController::class, 'showing'])->name('showing');
 
 Route::get('/teams', [TeamController::class, 'index'])->name('team');
 

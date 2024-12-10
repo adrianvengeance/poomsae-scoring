@@ -31,7 +31,7 @@ class IndividuTableView extends TableView
     public function headers(): array
     {
         return [
-            Header::title('Session')->sortBy('session'),
+            // Header::title('Session')->sortBy('session'),
             "Status",
             'Ranking',
             'Name',
@@ -53,7 +53,7 @@ class IndividuTableView extends TableView
     public function row($model): array
     {
         return [
-            $model->session,
+            // $model->session,
             $this->showStatus($model->status),
             UI::editable($model, 'ranking'),
             // $model->ranking,
