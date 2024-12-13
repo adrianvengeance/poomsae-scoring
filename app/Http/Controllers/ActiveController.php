@@ -30,19 +30,24 @@ class ActiveController extends Controller
     $title = '';
     $firstPerson = (Participants::where('status', 'active')->first());
 
-
     if ($firstPerson) {
       $gender = strtolower($firstPerson->gender) == 'm' ? 'Putra' : (strtolower($firstPerson->gender) == 'f' ? 'Putri' : '');
       // $title = $firstPerson->type . ' ' . $gender . ' ' . $firstPerson->class . ' ' . $firstPerson->category . ' Sesi ' . $firstPerson->session;
       $title = $firstPerson->type . ' ' . $gender . ' ' . $firstPerson->class . ' ' . $firstPerson->category;
+      $data = [
+        'team' => $firstPerson->type == 'INDIVIDUAL' ? false : true,
+        'title' => $title,
+        'participants' => $participantsModel->showingActive(),
+        'colors' => ['white', 'gold', 'ghostwhite', 'saddlebrown', 'saddlebrown', '']
+      ];
+    } else {
+      $data = [
+        'team' => false,
+        'title' => $title,
+        'participants' => 0,
+        'colors' => ['white', 'gold', 'ghostwhite', 'saddlebrown', 'saddlebrown', '']
+      ];
     }
-    $data = [
-      'team' => $firstPerson->type == 'INDIVIDUAL' ? false : true,
-      'title' => $title,
-      'participants' => $participantsModel->showingActive(),
-      'colors' => ['white', 'gold', 'ghostwhite', 'saddlebrown', 'saddlebrown', '']
-
-    ];
     return view('showing', $data);
   }
 }
